@@ -1,25 +1,19 @@
 import sys
+from typing import List
 
-def get_first_number(line: str) -> int:
-    for char in line:
-        value: int = ord(char) - ord('0')
+from solution import get_part_one_result, get_part_two_result
+from utils import get_input_lines
 
-        if (value >= 0 and value <= 9):
-            return value
-        
-    raise Exception("Input string contains no numbers")
-
-def get_calibration_value(line: str) -> int:
-    first_value = get_first_number(line)
-    last_value = get_first_number(line[::-1])
-
-    return (first_value * 10) + last_value
 
 if __name__ == "__main__":
-    filename = sys.argv[1]
+    if len(sys.argv) < 2:
+        raise Exception("Must provide an input file")
 
-    with open(filename, "r") as f:
-        lines = f.readlines()
-        result = sum([get_calibration_value(line) for line in lines])
+    # Part One
+    part_one_input: List[str] = get_input_lines(sys.argv[1])
+    print(f"Part One: {get_part_one_result(part_one_input)}")
 
-        print(result)
+    # Part Two
+    part_two_input: List[str] = get_input_lines(sys.argv[2]) if len(sys.argv) == 3 else part_one_input
+    print(f"Part Two: {get_part_two_result(part_two_input)}")
+    
