@@ -27,7 +27,7 @@ class DigitTrie:
     def try_get_digit(self, value: str, offset: int) -> int | None:
         (found, word) = self.trie.search_prefix(value, offset)
 
-        if found:
+        if found and word is not None:
             return self.digit_map[word]
         return None
 
